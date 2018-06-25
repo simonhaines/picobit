@@ -1,6 +1,7 @@
 #lang racket
 
-(require racket/mpair unstable/sequence racket/syntax)
+;(require racket/mpair unstable/sequence racket/syntax)
+(require racket/syntax)
 (require srfi/4)
 (require "env.rkt" "ast.rkt") ; to build the eta-expansions
 
@@ -87,8 +88,8 @@
     (,#'bitwise-ior       . ,bitwise-ior)
     (,#'bitwise-xor       . ,bitwise-xor)))
 
-(for ([(name folder) (in-pairs folders)])
-  (add-constant-folder name folder))
+(for ([folder (in-list folders)])
+  (add-constant-folder (car folder) (cdr folder)))
 
 
 (provide mutable-data-accessors)
