@@ -2,6 +2,7 @@ ifdef CONFIG_ARM_CPU_STM32F100RB
 ldscript := stm32f100rb.ld
 endif
 
+CC = gcc
 CFLAGS += -mcpu=cortex-m3 -mthumb -g -fno-hosted -nostdlib \
           -L$(arch)/lib -T$(ldscript) -Wl,-warn-common
 
@@ -18,4 +19,4 @@ picobit.hex: picobit.elf
 	$(CROSS)objcopy -O ihex $^ $@
 
 picobit.elf: $(obj-y) .config
-	$(CROSS)cc $(CFLAGS) -o $@ $(obj-y)
+	$(CROSS)$(CC) $(CFLAGS) -o $@ $(obj-y)
